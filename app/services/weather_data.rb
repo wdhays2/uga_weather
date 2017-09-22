@@ -10,7 +10,7 @@ require 'json'
 class WeatherData
   def initialize
     @url = 'http://weather.ggy.uga.edu/data/archive/daily/2008/20080101.txt'
-    @data = []
+    @data = {}
     @raw_data = []
     @reading_types = ['Max Wind Speed', 'Max Humidity', 'Max Temperature'].freeze
   end
@@ -20,8 +20,14 @@ class WeatherData
 
     # return data
     @raw_data = get_data_from_url
-    parse_raw_data
-    @data
+# binding.pry
+    # parse_raw_data
+    @raw_data.each do |row|
+      item = row[0]
+      row.shift
+      @data["#{item}"] = row
+    end
+    @data.to_json
   end
 
   def get_data_from_url
@@ -29,32 +35,30 @@ class WeatherData
     extract_data(data)
   end
 
-  def parse_raw_data
+  # def parse_raw_data
     # do something with raw data
     # store it into @data as an array of hashes
-    # results = @raw_data
-    # content_type :json
-    # erb results.to_json
-    results = sort_results(@raw_data)
-    @data = calculate_results(results)
-  end
+    # results = sort_results(@raw_data)
+    # @data = calculate_results(results)
+  # end
 
   def extract_data(data)
     data.map do |line|
       line_items = line.chomp.split(' ')
-      find_index(line_items)
+      # binding.pry
+      # find_index(line_items)
     end
   end
 
-  def find_index(line_items)
-    if 'Humidity'.include?(line_items[0])
-      line_items[1].to_f
-    elsif !'Ix'.include?(line_items[2])
-      line_items[2].to_f
-    else
-      line_items[3].to_f
-    end
-  end
+  # def find_index(line_items)
+  #   if 'Humidity'.include?(line_items[0])
+  #     line_items[1].to_f
+  #   elsif !'Ix'.include?(line_items[2])
+  #     line_items[2].to_f
+  #   else
+  #     line_items[3].to_f
+  #   end
+  # end
 
   ### Data Calculations ###
 
@@ -75,28 +79,28 @@ class WeatherData
     end
   end
 
-  def sort_results(data)
-    wind = []
-    humidity = []
-    temp = []
-    days = data.length / 3
-    days.times do
-      wind << data.shift
-      humidity << data.shift
-      temp << data.shift
-    end
+  # def sort_results(data)
+  #   wind = []
+  #   humidity = []
+  #   temp = []
+  #   days = data.length / 3
+  #   days.times do
+  #     wind << data.shift
+  #     humidity << data.shift
+  #     temp << data.shift
+  #   end
 
-    [wind, humidity, temp]
-  end
+  #   [wind, humidity, temp]
+  # end
 
-  def calculate_results(sorted_data)
-    results = {}
-    @reading_types.each_with_index do |type, indx|
-      results[type] = {
-        mean: mean(sorted_data[indx]),
-        median: median(sorted_data[indx])
-      }
-    end
-    results
-  end
+  # def calculate_results(sorted_data)
+  #   results = {}
+  #   @reading_types.each_with_index do |type, indx|
+  #     results[type] = {
+  #       mean: mean(sorted_data[indx]),
+  #       median: median(sorted_data[indx])
+  #     }
+  #   end
+  #   results
+  # end
 end
