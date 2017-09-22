@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'readline'
 require 'date'
 require 'open-uri'
@@ -7,33 +9,35 @@ require 'json'
 
 class WeatherData
   def initialize
-    @url = "weather.ggy.uga.edu/data/archive/daily/2008/20080101.txt"
+    @url = 'http://weather.ggy.uga.edu/data/archive/daily/2008/20080101.txt'
     @data = []
-    @raw_data = ""
+    @raw_data = []
+    @reading_types = ['Max Wind Speed', 'Max Humidity', 'Max Temperature'].freeze
   end
 
   def process
     # do something
 
-
     # return data
-    @data = get_data_from_url
+    @raw_data = get_data_from_url
+    parse_raw_data
+    @data
   end
 
   def get_data_from_url
-    data = open(@url).read
+    data = open(@url).readlines
     extract_data(data)
   end
 
-  # def parse_raw_data
-  #   # do something with raw data
-  #   # store it into @data as an array of hashes
-  #   results = @raw_data
-  #   content_type :json
-  #   erb results.to_json
-  # end
-
-
+  def parse_raw_data
+    # do something with raw data
+    # store it into @data as an array of hashes
+    # results = @raw_data
+    # content_type :json
+    # erb results.to_json
+    results = sort_results(@raw_data)
+    @data = calculate_results(results)
+  end
 
   def extract_data(data)
     data.map do |line|
@@ -87,7 +91,7 @@ class WeatherData
 
   def calculate_results(sorted_data)
     results = {}
-    READING_TYPES.each_with_index do |type, indx|
+    @reading_types.each_with_index do |type, indx|
       results[type] = {
         mean: mean(sorted_data[indx]),
         median: median(sorted_data[indx])

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class ReadingsController < ApplicationController
   def index
     @readings = WeatherData.new
-    @readings.process
+    @request = @readings.process
   end
 
   def create
