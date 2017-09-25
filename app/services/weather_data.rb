@@ -10,21 +10,15 @@ require 'json'
 class WeatherData
   def initialize
     @url = 'http://weather.ggy.uga.edu/data/archive/daily/2008/20080101.txt'
-    @data = {}
-    @raw_data = []
-    # @reading_types = ['Max Wind Speed', 'Max Humidity', 'Max Temperature'].freeze
   end
 
   def process
     # return data
-    @raw_data = get_data_from_url
-
+    @raw_data = retreive_data_from_url
     parse_raw_data
-
-    @data.to_json
   end
 
-  def get_data_from_url
+  def retreive_data_from_url
     data = open(@url).readlines
     extract_data(data)
   end
@@ -32,31 +26,17 @@ class WeatherData
   def parse_raw_data
     # do something with raw data
     # store it into @data as a hash of arrays
+    data = []
     @raw_data.each do |row|
-      item = row[0]
-      row.shift
-      if row[0] == 'Max'
-        row.each_with_index do |cell, indx|
-          row[indx-1] += " #{cell}" if row[indx] == 'Time'
-          row[indx].delete
-          binding.pry
-          as=12
-        end
-      else (/[a-zA-z]/).match?(row[0])
-        item += " " + row[0]
-        row.shift
-      end
-      @data["#{item}"] = row
+      data << row
     end
-    # results = sort_results(@raw_data)
+    sort_results(data)
     # @data = calculate_results(results)
   end
 
   def extract_data(data)
     data.map do |line|
-      line_items = line.chomp.split(' ')
-      # binding.pry
-      # find_index(line_items)
+      line.split(/\s{2,}/)
     end
   end
 
@@ -89,19 +69,15 @@ class WeatherData
   #   end
   # end
 
-  # def sort_results(data)
-  #   wind = []
-  #   humidity = []
-  #   temp = []
-  #   days = data.length / 3
-  #   days.times do
-  #     wind << data.shift
-  #     humidity << data.shift
-  #     temp << data.shift
-  #   end
-
-  #   [wind, humidity, temp]
-  # end
+  def sort_results(data)
+    results = {}
+    data.each do |row|
+      item = row[0].downcase.tr(' ', '_')
+      row.shift
+      results[item.to_s] = row
+    end
+    results.to_json
+  end
 
   # def calculate_results(sorted_data)
   #   results = {}

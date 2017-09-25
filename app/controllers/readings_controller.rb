@@ -3,7 +3,7 @@
 class ReadingsController < ApplicationController
   def index
     @readings = WeatherData.new
-    @request = @readings.process
+    @results = @readings.process
   end
 
   def create
@@ -12,6 +12,8 @@ class ReadingsController < ApplicationController
 
   def show
     # fetch data from weather site
+    @readings = WeatherData.new
+    @results = @readings.process
     # load data into Virtus model
     # render data
   end
