@@ -13,8 +13,9 @@ class ReadingsController < ApplicationController
 
   def show
     # fetch data from weather site
-    @readings = WeatherData.new
-    @results = @readings.process
+    wd = WeatherData.new
+    @readings = wd.process
+    @read = @readings.values.map { |data| DailyReading.new(data) }
     # load data into Virtus model
     # render data
   end

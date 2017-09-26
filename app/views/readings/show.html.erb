@@ -1,1 +1,50 @@
-<%= @results %>
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  /*table {
+    width: 100%;
+  }*/
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 5px;
+    text-align: left;
+  }
+  table tr:nth-child(even) {
+    background-color: #eeeeee;
+  }
+  table tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+  table th {
+    background-color: black;
+    color: white;
+  }
+  </style>
+</head>
+<body>
+  <table>
+    <tr>
+      <th>Parameter</th>
+      <th>Min Reading</th>
+      <th>Min Time</th>
+      <th>Max Reading</th>
+      <th>Max Time</th>
+      <th>Average</th>
+    </tr>
+    <% @read.each do |item| %>
+      <tr>
+        <td><%= item.parameter %></td>
+        <td><%= item.min_reading %></td>
+        <td><%= item.min_time %></td>
+        <td><%= item.max_reading %></td>
+        <td><%= item.max_time %></td>
+        <td><%= item.average %></td>
+      </tr>
+    <% end %>
+  </table>
+</body>
+</html>
