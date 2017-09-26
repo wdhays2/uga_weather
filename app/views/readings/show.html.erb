@@ -28,7 +28,7 @@
 <body>
   <table>
     <tr>
-      <th>Parameter</th>
+      <th>Measurement</th>
       <th>Min Reading</th>
       <th>Min Time</th>
       <th>Max Reading</th>
@@ -37,11 +37,11 @@
     </tr>
     <% @read.each do |item| %>
       <tr>
-        <td><%= item.parameter %></td>
+        <td><%= item.measurement %></td>
         <td><%= item.min_reading %></td>
-        <td><%= item.min_time %></td>
+        <td><%= item.min_time.strftime("%l:%M %P") %></td>
         <td><%= item.max_reading %></td>
-        <td><%= item.max_time %></td>
+        <td><%= item.max_time.strftime("%l:%M %P") %></td>
         <td><%= item.average %></td>
       </tr>
     <% end %>

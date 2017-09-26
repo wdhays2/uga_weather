@@ -71,7 +71,7 @@ class WeatherData
     @raw_data.each do |row|
       item = row[0].downcase.tr(' ', '_')
       results[item.to_s] = {
-        parameter: row[0],
+        measurement: row[0],
         max_reading: row[1],
         max_time: row[2],
         min_reading: row[3],
