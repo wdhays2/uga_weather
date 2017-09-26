@@ -15,7 +15,8 @@ class WeatherData
   def process
     # return data
     @raw_data = retreive_data_from_url
-    parse_raw_data
+    @raw_data.shift
+    sort_results
   end
 
   def retreive_data_from_url
@@ -23,16 +24,12 @@ class WeatherData
     extract_data(data)
   end
 
-  def parse_raw_data
-    # do something with raw data
-    # store it into @data as a hash of arrays
-    data = []
-    @raw_data.each do |row|
-      data << row
-    end
-    sort_results(data)
-    # @data = calculate_results(results)
-  end
+  # def parse_raw_data
+  #   # do something with raw data
+  #   # store it into @data as a hash of arrays
+
+  #   # @data = calculate_results(results)
+  # end
 
   def extract_data(data)
     data.map do |line|
@@ -69,14 +66,20 @@ class WeatherData
   #   end
   # end
 
-  def sort_results(data)
+  def sort_results
     results = {}
-    data.each do |row|
+    @raw_data.each do |row|
       item = row[0].downcase.tr(' ', '_')
-      row.shift
-      results[item.to_s] = row
+      results[item.to_s] = {
+        parameter: row[0],
+        max_reading: row[1],
+        max_time: row[2],
+        min_reading: row[3],
+        min_time: row[4],
+        average: row[5]
+      }
     end
-    results.to_json
+    results
   end
 
   # def calculate_results(sorted_data)

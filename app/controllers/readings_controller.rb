@@ -2,8 +2,9 @@
 
 class ReadingsController < ApplicationController
   def index
-    @readings = WeatherData.new
-    @results = @readings.process
+    wd = WeatherData.new
+    @readings = wd.process
+    @read = @readings.values.map { |data| DailyReading.new(data) }
   end
 
   def create
