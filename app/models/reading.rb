@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DailyReading
+class Reading
   include Virtus.model
 
   attribute :measurement, String
@@ -9,4 +9,5 @@ class DailyReading
   attribute :min_reading, Float
   attribute :min_time, Time
   attribute :average, Float
+  attribute :created_on, Date
 end

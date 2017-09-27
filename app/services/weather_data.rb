@@ -8,12 +8,12 @@ require 'pry'
 require 'json'
 
 class WeatherData
-  def initialize
-    @url = 'http://weather.ggy.uga.edu/data/archive/daily/2008/20080101.txt'
+  def initialize(date)
+    date ||= (Date.today - 1.day).strftime('%Y%m%d').to_s
+    @url = "http://weather.ggy.uga.edu/data/archive/daily/#{date}.txt"
   end
 
   def process
-    # return data
     @raw_data = retreive_data_from_url
     @raw_data.shift
     sort_results
@@ -24,18 +24,34 @@ class WeatherData
     extract_data(data)
   end
 
+  def extract_data(data)
+    data.map do |line|
+      line.split(/\s{2,}/)
+    end
+  end
+
+  def sort_results
+    results = {}
+    @raw_data.each do |row|
+      item = row[0].downcase.tr(' ', '_')
+      results[item.to_s] = {
+        measurement: row[0],
+        max_reading: row[1],
+        max_time: row[2],
+        min_reading: row[3],
+        min_time: row[4],
+        average: row[5]
+      }
+    end
+    results
+  end
+
   # def parse_raw_data
   #   # do something with raw data
   #   # store it into @data as a hash of arrays
 
   #   # @data = calculate_results(results)
   # end
-
-  def extract_data(data)
-    data.map do |line|
-      line.split(/\s{2,}/)
-    end
-  end
 
   # def find_index(line_items)
   #   if 'Humidity'.include?(line_items[0])
@@ -66,21 +82,7 @@ class WeatherData
   #   end
   # end
 
-  def sort_results
-    results = {}
-    @raw_data.each do |row|
-      item = row[0].downcase.tr(' ', '_')
-      results[item.to_s] = {
-        measurement: row[0],
-        max_reading: row[1],
-        max_time: row[2],
-        min_reading: row[3],
-        min_time: row[4],
-        average: row[5]
-      }
-    end
-    results
-  end
+
 
   # def calculate_results(sorted_data)
   #   results = {}

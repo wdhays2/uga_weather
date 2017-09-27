@@ -2,15 +2,15 @@
 <html>
 <head>
   <style>
-  /*table {
-    width: 100%;
-  }*/
+  table {
+    width: 80%;
+  }
   table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
   }
   th, td {
-    padding: 5px;
+    padding: 7px;
     text-align: left;
   }
   table tr:nth-child(even) {
@@ -20,12 +20,17 @@
     background-color: #ffffff;
   }
   table th {
-    background-color: black;
+    background-color: #3c3c3c;
     color: white;
   }
   </style>
 </head>
 <body>
+  <form action="/readings" method="get">
+    <input name="date" />
+    <input type="submit" />
+  </form>
+  <h3>Data for: <%= params[:date] %></h3>
   <table>
     <tr>
       <th>Measurement</th>
