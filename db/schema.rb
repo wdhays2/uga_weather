@@ -12,11 +12,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_170_920_153_149) do
-  create_table 'readings', force: :cascade do |t|
-    t.integer 'max_wind_speed'
-    t.integer 'max_humidity'
-    t.float 'max_temp'
+ActiveRecord::Schema.define(version: 20_170_927_165_459) do
+  create_table 'weather_entries', force: :cascade do |t|
+    t.string 'name'
+    t.float 'max_reading'
+    t.time 'max_time'
+    t.float 'min_reading'
+    t.time 'min_time'
+    t.float 'avg_reading'
+    t.date 'entered_on'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
   end

@@ -30,26 +30,28 @@
     <input name="date" />
     <input type="submit" />
   </form>
-  <h3>Data for: <%= params[:date] %></h3>
-  <table>
-    <tr>
-      <th>Measurement</th>
-      <th>Min Reading</th>
-      <th>Min Time</th>
-      <th>Max Reading</th>
-      <th>Max Time</th>
-      <th>Average</th>
-    </tr>
-    <% @read.each do |item| %>
+  <% @readings.each do |reading| %>
+    <h3>Data for: <%= reading[0]['entered_on'] %></h3>
+    <table>
       <tr>
-        <td><%= item.measurement %></td>
-        <td><%= item.min_reading %></td>
-        <td><%= item.min_time.strftime("%l:%M %P") %></td>
-        <td><%= item.max_reading %></td>
-        <td><%= item.max_time.strftime("%l:%M %P") %></td>
-        <td><%= item.average %></td>
+        <th>Measurement</th>
+        <th>Min Reading</th>
+        <th>Min Time</th>
+        <th>Max Reading</th>
+        <th>Max Time</th>
+        <th>Average</th>
       </tr>
-    <% end %>
-  </table>
+      <% reading.each do |item| %>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= item.min_reading %></td>
+          <td><%= item.min_time.strftime("%l:%M %P") %></td>
+          <td><%= item.max_reading %></td>
+          <td><%= item.max_time.strftime("%l:%M %P") %></td>
+          <td><%= item.avg_reading %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
 </body>
 </html>

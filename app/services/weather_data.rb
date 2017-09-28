@@ -9,8 +9,9 @@ require 'json'
 
 class WeatherData
   def initialize(date)
-    date ||= (Date.today - 1.day).strftime('%Y%m%d').to_s
-    @url = "http://weather.ggy.uga.edu/data/archive/daily/#{date}.txt"
+    @date = date
+    @date ||= (Date.today - 1.day).strftime('%Y%m%d')
+    @url = "http://weather.ggy.uga.edu/data/archive/daily/#{@date}.txt"
   end
 
   def process
@@ -34,16 +35,21 @@ class WeatherData
     results = {}
     @raw_data.each do |row|
       item = row[0].downcase.tr(' ', '_')
-      results[item.to_s] = {
-        measurement: row[0],
-        max_reading: row[1],
-        max_time: row[2],
-        min_reading: row[3],
-        min_time: row[4],
-        average: row[5]
-      }
+      store_data(results, row, item)
     end
     results
+  end
+
+  def store_data(results, row, item)
+    results[item.to_s] = {
+      name: row[0],
+      max_reading: row[1],
+      max_time: row[2],
+      min_reading: row[3],
+      min_time: row[4],
+      avg_reading: row[5],
+      entered_on: @date
+    }
   end
 
   # def parse_raw_data
@@ -81,8 +87,6 @@ class WeatherData
   #     mean([item1, item2])
   #   end
   # end
-
-
 
   # def calculate_results(sorted_data)
   #   results = {}
