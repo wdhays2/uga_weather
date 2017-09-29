@@ -11,8 +11,8 @@ class ImportWeather
     366.times do
       wd = WeatherData.new(@date.strftime('%Y%m%d'))
       readings = wd.process
-      readings.map do |reading|
-        WeatherEntry.create(reading[1])
+      readings.map do |_key, data|
+        WeatherEntry.create(data)
       end
       return if @date >= @date.end_of_year
       return if @date >= Date.today - 1.day

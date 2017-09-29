@@ -28,7 +28,7 @@
 <body>
   <form action="/readings" method="get">
     <input name="date" />
-    <input type="submit" />
+    <input type="submit" value="Submit Date"/>
   </form>
   <% @readings.each do |reading| %>
     <h3>Data for: <%= reading[0]['entered_on'] %></h3>
@@ -52,6 +52,12 @@
         </tr>
       <% end %>
     </table>
+    <br>
+    <form action="/charts" method="get">
+      <input type="submit" value="Chart Data">
+      <input type="text" value="<%= reading[0]['entered_on'] %>" name="date">
+    </form>
+    <br><br>
   <% end %>
 </body>
 </html>

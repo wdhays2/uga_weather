@@ -10,8 +10,6 @@ class CreateWeatherEntries < ActiveRecord::Migration[5.1]
       t.time :min_time
       t.float :avg_reading
       t.date :entered_on
-
-      t.timestamps
     end
   end
 end
