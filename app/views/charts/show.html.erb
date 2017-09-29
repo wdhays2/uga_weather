@@ -1,68 +1,53 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://code.highcharts.com/highcharts-more.js"></script>
-</head>
-<body>
-  <% @data.each do |key, value| %>
-    <div id="<%= key %>" style="min-width: 640px; height: 480px; margin: 0 auto">
-    </div>
-    <form action="/charts" method="get">
-      <input name="date" />
-      <input type="submit" value="Submit Date"/>
-    </form>
-    <script>
-      Highcharts.chart('<%= key %>', {
-
-        chart: {
-            type: 'columnrange',
-            inverted: true
-        },
-
-        title: {
-            text: '<%= "#{key} variation by day +/- 2 days" %>'
-        },
-
-        subtitle: {
-            text: 'Observed at the University of Georgia'
-        },
-
-        xAxis: {
-            categories: <%= @date_range.to_json.html_safe %>
-        },
-
-        yAxis: {
-            title: {
-                text: '<%= "#{key}" %>'
-            }
-        },
-
-        tooltip: {
-            valueSuffix: null
-        },
-
-        plotOptions: {
-            columnrange: {
-                dataLabels: {
-                    enabled: true,
-                    formatter: function () {
-                        return this.y;
-                    }
-                }
-            }
-        },
-
-        legend: {
-            enabled: false
-        },
-
-        series: [{
-            name: '<%= "#{key}" %>',
-            data: <%= value %>
-        }]
-      });
-    </script>
-  <% end %>
-</body>
+  <head>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+  </head>
+  <body>
+    <% @data.each do |key, value| %>
+      <% tooltip_value = case key %>
+        <% when 'Wind Speed' %>
+          <% ' MPH' %>
+        <% when 'Humidity' %>
+          <% '%' %>
+        <% when 'Raw Barometer' %>
+          <% '' %>
+        <% when 'UV Index' %>
+          <% '' %>
+        <% when 'Solar Radiation' %>
+          <% '' %>
+        <% else %>
+          <% '°F' %>
+      <%end%>
+      <div id="<%= key %>" style="min-width: 640px; height: 480px; margin: 0 auto">
+      </div>
+      <form action="/charts" method="get">
+        <input name="date" />
+        <input type="submit" value="Submit Date"/>
+      </form>
+      <script>
+        Highcharts.chart('<%= key %>', {
+          chart: { type: 'columnrange', inverted: true },
+          title: { text: '<%= "#{key} variation by day +/- 2 days" %>' },
+          subtitle: { text: 'Observed at the University of Georgia' },
+          xAxis: { categories: <%= @date_range.to_json.html_safe %> },
+          yAxis: { title: { text: '<%= key %>' } },
+          tooltip: { valueSuffix: '<%= tooltip_value %>' },
+          plotOptions: {
+              columnrange: {
+                  dataLabels: {
+                      enabled: true,
+                      formatter: function () {
+                          return this.y + '<%= tooltip_value %>';
+                      }
+                  }
+              }
+          },
+          legend: { enabled: false },
+          series: [{ name: '<%= key %>', data: <%= value %> }]
+        });
+      </script>
+    <% end %>
+  </body>
 </html>

@@ -90,11 +90,11 @@ class ChartsController < ApplicationController
   def data_collector(date, category)
     combine = []
     combine << WeatherEntry.where(entered_on: date.strftime('%Y%m%d'))
-               .where(name: category).select(:min_reading).pluck(:min_reading)
-               .first
+                           .where(name: category).select(:min_reading)
+                           .pluck(:min_reading).first
 
     combine << WeatherEntry.where(entered_on: date.strftime('%Y%m%d'))
-               .where(name: category).select(:max_reading).pluck(:max_reading)
-               .first
+                           .where(name: category).select(:max_reading)
+                           .pluck(:max_reading).first
   end
 end
