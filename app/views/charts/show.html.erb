@@ -10,6 +10,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
+    <br>
+    <form action="/charts" method="get">
+      <input name="date" />
+      <input type="submit" value="Submit New Date"/>
+    </form>
+    <br>
     <% @data.each do |key, value| %>
       <% tooltip_value = case key %>
         <% when 'Wind Speed' %>
@@ -30,10 +36,6 @@
       <div class="col-md-6">
       <div id="<%= key %>" style="min-width: 500px; height: 400px; margin: 20">
       </div>
-      <form action="/charts" method="get">
-        <input name="date" />
-        <input type="submit" value="Submit Date"/>
-      </form>
       <script>
         Highcharts.chart('<%= key %>', {
           chart: { type: 'columnrange', inverted: true },
@@ -56,7 +58,13 @@
           series: [{ name: '<%= key %>', data: <%= value %> }]
         });
       </script>
+      <br><br>
       </div>
     <% end %>
+    <form action="/charts" method="get">
+      <input name="date" />
+      <input type="submit" value="Submit New Date"/>
+    </form>
+    <br>
   </body>
 </html>
