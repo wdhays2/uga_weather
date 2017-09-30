@@ -42,6 +42,8 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'rubocop'
   gem 'selenium-webdriver'
+  gem 'rspec'
+  gem 'coveralls', require: false
 end
 
 group :development do
