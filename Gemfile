@@ -42,8 +42,9 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'rubocop'
   gem 'selenium-webdriver'
-  gem 'rspec'
+  gem 'rspec-rails'
   gem 'coveralls', require: false
+  gem 'factory_girl'
 end
 
 group :development do

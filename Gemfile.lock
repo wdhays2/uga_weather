@@ -84,6 +84,8 @@ GEM
     equalizer (0.0.11)
     erubi (1.6.1)
     execjs (2.7.0)
+    factory_girl (4.8.1)
+      activesupport (>= 3.0.0)
     ffi (1.9.18)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
@@ -164,10 +166,6 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rspec (3.6.0)
-      rspec-core (~> 3.6.0)
-      rspec-expectations (~> 3.6.0)
-      rspec-mocks (~> 3.6.0)
     rspec-core (3.6.0)
       rspec-support (~> 3.6.0)
     rspec-expectations (3.6.0)
@@ -175,6 +173,14 @@ GEM
       rspec-support (~> 3.6.0)
     rspec-mocks (3.6.0)
       diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.6.0)
+    rspec-rails (3.6.1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.6.0)
+      rspec-expectations (~> 3.6.0)
+      rspec-mocks (~> 3.6.0)
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
     rubocop (0.50.0)
@@ -260,13 +266,14 @@ DEPENDENCIES
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
   coveralls
+  factory_girl
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pry
   pry-byebug
   puma (~> 3.7)
   rails (~> 5.1.4)
-  rspec
+  rspec-rails
   rubocop
   sass-rails (~> 5.0)
   selenium-webdriver

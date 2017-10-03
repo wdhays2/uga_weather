@@ -16,46 +16,31 @@
       <input type="submit" value="Submit New Date"/>
     </form>
     <br>
-    <% @data.each do |key, value| %>
-      <% tooltip_value = case key %>
-        <% when 'Wind Speed' %>
-          <% ' MPH' %>
-          <% when 'Wind Direction' %>
-          <% ' Degrees' %>
-        <% when 'Humidity' %>
-          <% '%' %>
-        <% when 'Raw Barometer' %>
-          <% '' %>
-        <% when 'UV Index' %>
-          <% '' %>
-        <% when 'Solar Radiation' %>
-          <% '' %>
-        <% else %>
-          <% '°F' %>
-      <%end%>
+    <% binding.pry %>
+    <% @chart_display.categories.each_with_index do |value, indx| %>
       <div class="col-md-6">
-      <div id="<%= key %>" style="min-width: 500px; height: 400px; margin: 20">
+      <div id="<%= @chart_display.categories[indx] %>" style="min-width: 500px; height: 400px; margin: 20">
       </div>
       <script>
-        Highcharts.chart('<%= key %>', {
+        Highcharts.chart('<%= @chart_display.categories[indx] %>', {
           chart: { type: 'columnrange', inverted: true },
-          title: { text: '<%= "#{key} variation by day +/- 2 days" %>' },
+          title: { text: '<%= "#{@chart_display.categories[indx]} variation by day +/- 2 days" %>' },
           subtitle: { text: 'Observed at the University of Georgia' },
-          xAxis: { categories: <%= @date_range.to_json.html_safe %> },
-          yAxis: { title: { text: '<%= key %>' } },
-          tooltip: { valueSuffix: '<%= tooltip_value %>' },
+          xAxis: { categories: <%= @chart_display.date.to_json.html_safe %> },
+          yAxis: { title: { text: '<%= @chart_display.categories[indx] %>' } },
+          tooltip: { valueSuffix: '<%= tooltip_value(@chart_display.categories[indx]) %>' },
           plotOptions: {
               columnrange: {
                   dataLabels: {
                       enabled: true,
                       formatter: function () {
-                          return this.y + '<%= tooltip_value %>';
+                          return this.y + '<%= tooltip_value(@chart_display[:categories][:indx]) %>';
                       }
                   }
               }
           },
           legend: { enabled: false },
-          series: [{ name: '<%= key %>', data: <%= value %> }]
+          series: [{ name: '<%= @chart_display[:categories][:indx] %>', data: <%= value %> }]
         });
       </script>
       <br><br>
