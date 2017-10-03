@@ -1,23 +1,51 @@
 class ChartDisplay
 
-  def initialize(date)
-binding.pry
-    categories
-    empty_arrays
-    @date = date[:date] || '2017-01-01'
-    weather_date = @date.to_date - 2.days
-    @date_range = collect_for_date_range(weather_date)
-    @data = put_it_all_together
-    process
+  def self.process(options)
+    obj = new(options)
+    obj.run
   end
 
-  def process
+  def initialize(options)
+    categories
+    empty_arrays
+    @date = options[:date] || '2017-01-01'
+    @weather_date = @date.to_date - 2.days
+  end
+
+  def run
+    empty_arrays
+    @date_range = collect_for_date_range(@weather_date)
+    @data = put_it_all_together
     {
       data: @data,
       date: @date,
-      categories: @categories
+      categories: @categories,
+      date_range: @date_range,
+      tooltip_value: @tooltip_value
     }
   end
+
+    #refactor
+  def tooltip_value(key)
+    case key
+    when 'Wind Speed'
+      ' MPH'
+      when 'Wind Direction'
+      ' Degrees'
+    when 'Humidity'
+      '%'
+    when 'Raw Barometer'
+      ''
+    when 'UV Index'
+      ''
+    when 'Solar Radiation'
+      ''
+    else
+      '°F'
+    end
+  end
+
+  private
 
   def categories
     @categories = ['Wind Direction', 'Wind Speed', 'Humidity', 'Out Temp',
@@ -66,8 +94,10 @@ binding.pry
 
   def put_it_all_together
     data = {}
+    @tooltip_value = []
     @categories.each_with_index do |category, indx|
       data[category] = combine_data_variables[indx]
+      @tooltip_value << tooltip_value(category)
     end
     data
   end
@@ -99,25 +129,5 @@ binding.pry
                       .where(name: category)
                       .first
     [row[:min_reading], row[:max_reading]]
-  end
-
-  #refactor
-  def tooltip_value(key)
-    case key
-    when 'Wind Speed'
-      ' MPH'
-      when 'Wind Direction'
-      ' Degrees'
-    when 'Humidity'
-      '%'
-    when 'Raw Barometer'
-      ''
-    when 'UV Index'
-      ''
-    when 'Solar Radiation'
-      ''
-    else
-      '°F'
-    end
   end
 end

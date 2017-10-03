@@ -16,31 +16,30 @@
       <input type="submit" value="Submit New Date"/>
     </form>
     <br>
-    <% binding.pry %>
-    <% @chart_display.categories.each_with_index do |value, indx| %>
+    <% @chart_display[:categories].each_with_index do |category, indx| %>
       <div class="col-md-6">
-      <div id="<%= @chart_display.categories[indx] %>" style="min-width: 500px; height: 400px; margin: 20">
+      <div id="<%= category %>" style="min-width: 500px; height: 400px; margin: 20">
       </div>
       <script>
-        Highcharts.chart('<%= @chart_display.categories[indx] %>', {
+        Highcharts.chart('<%= category %>', {
           chart: { type: 'columnrange', inverted: true },
-          title: { text: '<%= "#{@chart_display.categories[indx]} variation by day +/- 2 days" %>' },
+          title: { text: '<%= "#{ category } variation by day +/- 2 days" %>' },
           subtitle: { text: 'Observed at the University of Georgia' },
-          xAxis: { categories: <%= @chart_display.date.to_json.html_safe %> },
-          yAxis: { title: { text: '<%= @chart_display.categories[indx] %>' } },
-          tooltip: { valueSuffix: '<%= tooltip_value(@chart_display.categories[indx]) %>' },
+          xAxis: { categories: <%= @chart_display[:date_range].to_json.html_safe %> },
+          yAxis: { title: { text: '<%= category %>' } },
+          tooltip: { valueSuffix: '<%= @chart_display[:tooltip_value][indx] %>' },
           plotOptions: {
               columnrange: {
                   dataLabels: {
                       enabled: true,
                       formatter: function () {
-                          return this.y + '<%= tooltip_value(@chart_display[:categories][:indx]) %>';
+                          return this.y + '<%= @chart_display[:tooltip_value][indx] %>';
                       }
                   }
               }
           },
           legend: { enabled: false },
-          series: [{ name: '<%= @chart_display[:categories][:indx] %>', data: <%= value %> }]
+          series: [{ name: '<%= category %>', data: <%= @chart_display[:data][category] %> }]
         });
       </script>
       <br><br>
