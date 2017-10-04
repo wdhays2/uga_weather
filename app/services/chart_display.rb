@@ -22,6 +22,7 @@ class ChartDisplay
   #   }
   #   ...
   # ]
+
   def run
     date_range = (@start_date..@end_date).map { |date| date.to_s.delete('-') }
     categories.map do |category|
@@ -41,17 +42,15 @@ class ChartDisplay
       'Wind Direction', 'Wind Speed', 'Humidity', 'Out Temp',
       'Raw Barometer', 'UV Index', 'Solar Radiation',
       'Wind Chill', 'Out Heat Ix', 'Dew Point'
-   ]
+    ]
   end
 
   def tooltip_value(key)
+    return if ['Solar Radiation', 'Raw Barometer', 'UV Index'].include?(key)
     case key
     when 'Wind Speed' then ' MPH'
     when 'Wind Direction' then ' Degrees'
     when 'Humidity' then '%'
-    when 'Raw Barometer' then ''
-    when 'UV Index' then ''
-    when 'Solar Radiation' then ''
     else '°F'
     end
   end
