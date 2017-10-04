@@ -20,28 +20,7 @@
       <div class="col-md-6">
       <div id="<%= chart_data[:section] %>" style="min-width: 500px; height: 400px; margin: 20">
       </div>
-      <script>
-        Highcharts.chart('<%= chart_data[:section] %>', {
-          chart: { type: 'columnrange', inverted: true },
-          title: { text: '<%= "#{ chart_data[:section] } variation by day +/- 2 days" %>' },
-          subtitle: { text: 'Observed at the University of Georgia' },
-          xAxis: { categories: <%= chart_data[:date_range].to_json.html_safe %> },
-          yAxis: { title: { text: '<%= chart_data[:section] %>' } },
-          tooltip: { valueSuffix: '<%= chart_data[:tooltip] %>' },
-          plotOptions: {
-              columnrange: {
-                  dataLabels: {
-                      enabled: true,
-                      formatter: function () {
-                          return this.y + '<%= chart_data[:tooltip] %>';
-                      }
-                  }
-              }
-          },
-          legend: { enabled: false },
-          series: [{ name: '<%= chart_data[:section] %>', data: <%= chart_data[:values] %> }]
-        });
-      </script>
+      <%= javascript_tag "weatherDisplay(#{ chart_data.to_json })" %>
       <br><br>
       </div>
     <% end %>

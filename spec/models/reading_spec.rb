@@ -1,4 +1,4 @@
-require '../reading'
+require File.dirname(__FILE__) + '/../spec_helper'
 
 RSpec.describe Reading do
   before :each do
