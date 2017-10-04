@@ -1,5 +1,4 @@
 class ChartDisplay
-
   def self.process(options)
     obj = new(options)
     obj.run
@@ -13,27 +12,33 @@ class ChartDisplay
   end
 
   def run
-    empty_arrays
     @date_range = collect_for_date_range(@weather_date)
     @data = put_it_all_together
+binding.pry
+
     {
       data: @data,
-      date: @date,
       categories: @categories,
       date_range: @date_range,
       tooltip_value: @tooltip_value
     }
   end
 
-    #refactor
   def tooltip_value(key)
     case key
     when 'Wind Speed'
       ' MPH'
-      when 'Wind Direction'
+    when 'Wind Direction'
       ' Degrees'
     when 'Humidity'
       '%'
+    else
+      other_tooltips(key)
+    end
+  end
+
+  def other_tooltips(key)
+    case key
     when 'Raw Barometer'
       ''
     when 'UV Index'
@@ -78,18 +83,9 @@ class ChartDisplay
   end
 
   def combine_data_variables
-    [
-      @wind_dir_range,
-      @wind_spd_range,
-      @humidity_range,
-      @temp_range,
-      @barometer_range,
-      @uv_range,
-      @radiation_range,
-      @wind_chill_range,
-      @heat_index_range,
-      @dew_point_range
-    ]
+    [@wind_dir_range, @wind_spd_range, @humidity_range, @temp_range,
+      @barometer_range, @uv_range, @radiation_range, @wind_chill_range,
+      @heat_index_range, @dew_point_range]
   end
 
   def put_it_all_together

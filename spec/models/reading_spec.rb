@@ -2,7 +2,7 @@ require '../reading'
 
 RSpec.describe Reading do
   before :each do
-    @reading = Reading.new()
+    @reading = Reading.new
   end
 
   describe 'reading' do
