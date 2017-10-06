@@ -206,58 +206,6 @@
         0,
         0
       ],
-      "/Users/wileyhays/github/rails_weather_uga/uga_weather/app/controllers/chart_controller.rb": [
-        null,
-        null,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "/Users/wileyhays/github/rails_weather_uga/uga_weather/app/controllers/reading_controller.rb": [
-        null,
-        null,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        0,
-        0,
-        null,
-        null,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "/Users/wileyhays/github/rails_weather_uga/uga_weather/app/controllers/weather_entry_controller.rb": [
-        null,
-        null,
-        0,
-        0
-      ],
       "/Users/wileyhays/github/rails_weather_uga/uga_weather/app/jobs/application_job.rb": [
         null,
         null,
@@ -340,6 +288,6 @@
         0
       ]
     },
-    "timestamp": 1507258106
+    "timestamp": 1507259019
   }
 }

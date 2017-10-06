@@ -1,63 +1,33 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-  table {
-    width: 80%;
-  }
-  table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
-  th, td {
-    padding: 7px;
-    text-align: left;
-  }
-  table tr:nth-child(even) {
-    background-color: #eeeeee;
-  }
-  table tr:nth-child(odd) {
-    background-color: #ffffff;
-  }
-  table th {
-    background-color: #3c3c3c;
-    color: white;
-  }
-  </style>
-</head>
-<body>
-  <form action="/readings" method="get">
+<form action="/readings" method="get">
     <input name="date" />
     <input type="submit" value="Submit Date"/>
-  </form>
-  <% @readings.each do |reading| %>
-    <h3>Data for: <%= reading[0]['entered_on'] %></h3>
-    <table>
+</form>
+<% @readings.each do |reading| %>
+  <h3>Data for: <%= reading[0]['entered_on'] %></h3>
+  <table>
+    <tr>
+      <th>Measurement</th>
+      <th>Min Reading</th>
+      <th>Min Time</th>
+      <th>Max Reading</th>
+      <th>Max Time</th>
+      <th>Average</th>
+    </tr>
+    <% reading.each do |item| %>
       <tr>
-        <th>Measurement</th>
-        <th>Min Reading</th>
-        <th>Min Time</th>
-        <th>Max Reading</th>
-        <th>Max Time</th>
-        <th>Average</th>
+        <td><%= item.name %></td>
+        <td><%= item.min_reading %></td>
+        <td><%= item.min_time.strftime("%l:%M %P") %></td>
+        <td><%= item.max_reading %></td>
+        <td><%= item.max_time.strftime("%l:%M %P") %></td>
+        <td><%= item.avg_reading %></td>
       </tr>
-      <% reading.each do |item| %>
-        <tr>
-          <td><%= item.name %></td>
-          <td><%= item.min_reading %></td>
-          <td><%= item.min_time.strftime("%l:%M %P") %></td>
-          <td><%= item.max_reading %></td>
-          <td><%= item.max_time.strftime("%l:%M %P") %></td>
-          <td><%= item.avg_reading %></td>
-        </tr>
-      <% end %>
-    </table>
-    <br>
-    <form action="/charts" method="get">
-      <input type="submit" value="Chart Data">
-      <input type="text" value="<%= reading[0]['entered_on'] %>" name="date">
-    </form>
-    <br><br>
-  <% end %>
-</body>
-</html>
+    <% end %>
+  </table>
+  <br>
+  <form action="/charts" method="get">
+    <input type="submit" value="Chart Data">
+    <input type="text" value="<%= reading[0]['entered_on'] %>" name="date">
+  </form>
+  <br><br>
+<% end %>
