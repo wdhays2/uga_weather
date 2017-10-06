@@ -4,24 +4,28 @@
 </form>
 <% @readings.each do |reading| %>
   <h3>Data for: <%= reading[0]['entered_on'] %></h3>
-  <table>
-    <tr>
-      <th>Measurement</th>
-      <th>Min Reading</th>
-      <th>Min Time</th>
-      <th>Max Reading</th>
-      <th>Max Time</th>
-      <th>Average</th>
-    </tr>
-    <% reading.each do |item| %>
+  <table id="readings" class="display" cellspacing="0" width="100%">
+    <thead>
       <tr>
-        <td><%= item.name %></td>
-        <td><%= item.min_reading %></td>
-        <td><%= item.min_time.strftime("%l:%M %P") %></td>
-        <td><%= item.max_reading %></td>
-        <td><%= item.max_time.strftime("%l:%M %P") %></td>
-        <td><%= item.avg_reading %></td>
+        <th>Measurement</th>
+        <th>Min Reading</th>
+        <th>Min Time</th>
+        <th>Max Reading</th>
+        <th>Max Time</th>
+        <th>Average</th>
       </tr>
+    </thead>
+    <% reading.each do |item| %>
+      <tbody>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= item.min_reading %></td>
+          <td><%= item.min_time.strftime("%l:%M %P") %></td>
+          <td><%= item.max_reading %></td>
+          <td><%= item.max_time.strftime("%l:%M %P") %></td>
+          <td><%= item.avg_reading %></td>
+        </tr>
+      </tbody>
     <% end %>
   </table>
   <br>
