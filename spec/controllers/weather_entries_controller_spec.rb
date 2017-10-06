@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'rails_helper'
 
-RSpec.describe WeatherEntriesController do
+RSpec.describe WeatherEntriesController, type: :controller do
 end

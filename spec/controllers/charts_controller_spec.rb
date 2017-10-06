@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'rails_helper'
 
-RSpec.describe ChartsController do
+RSpec.describe ChartsController, type: :controller do
 end

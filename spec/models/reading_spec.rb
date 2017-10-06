@@ -1,11 +1,13 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'rails_helper'
 
-RSpec.describe Reading do
+RSpec.describe Reading, type: :model do
   before :each do
     @reading = Reading.new
   end
 
   describe 'reading' do
-    expect(@reading).to_be_an_instance_of Reading
+    it 'is a Reading object' do
+      expect(@reading).to be_an_instance_of(Reading)
+    end
   end
 end

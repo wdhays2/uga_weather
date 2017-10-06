@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'rails_helper'
 
-RSpec.describe ReadingsController do
+RSpec.describe ReadingsController, type: :controller do
 end
