@@ -2,9 +2,9 @@
     <input name="date" />
     <input type="submit" value="Submit Date"/>
 </form>
-<% @readings.each do |reading| %>
+<% @readings.each_with_index do |reading, indx| %>
   <h3>Data for: <%= reading[0]['entered_on'] %></h3>
-  <table id="readings" class="display" cellspacing="0" width="100%">
+  <table class="readings" class="display" cellspacing="0" width="100%">
     <thead>
       <tr>
         <th>Measurement</th>
@@ -15,8 +15,9 @@
         <th>Average</th>
       </tr>
     </thead>
+          <tbody>
+
     <% reading.each do |item| %>
-      <tbody>
         <tr>
           <td><%= item.name %></td>
           <td><%= item.min_reading %></td>
@@ -25,8 +26,9 @@
           <td><%= item.max_time.strftime("%l:%M %P") %></td>
           <td><%= item.avg_reading %></td>
         </tr>
-      </tbody>
     <% end %>
+          </tbody>
+
   </table>
   <br>
   <form action="/charts" method="get">
