@@ -2,7 +2,6 @@
     <input name="date" />
     <input type="submit" value="Submit Date"/>
 </form>
-<% binding.pry %>
 <% @readings.each_with_index do |reading, indx| %>
   <h3>Data for: <%= reading[0].entered_on.to_s %></h3>
   <table class="readings" cellspacing="0" width="100%">

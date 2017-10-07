@@ -23,24 +23,20 @@ class GatherReadings
 
   def retrieve_from_database
     ids = WeatherEntry.select(:id)
-                            .where('entered_on between ? AND ?', @start_date, @end_date)
-                            .order(entered_on: :asc)
-                            .pluck(:id)
-    readings = ids.map { |id| WeatherEntry.find(id) }
-    method_name(readings)
+                      .where('entered_on between ? AND ?', @start_date, @end_date)
+                      .order(entered_on: :asc)
+                      .pluck(:id)
+    r = ids.map { |id| WeatherEntry.find(id) }
+    method_name(r)
   end
 
-  def method_name(readings)
+  def method_name(r)
     day = @start_date
     days_readings = []
     5.times do
-      readings.each do |reading|
-        if reading.entered_on == day
-          days_readings << reading
-        end
-      end
-      day += 1.day
+      r.each { |reading| days_readings << reading if reading.entered_on == day }
       @readings << days_readings
+      day += 1.day
       days_readings = []
     end
     @readings.reject!(&:empty?)
