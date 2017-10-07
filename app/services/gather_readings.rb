@@ -14,8 +14,7 @@ class GatherReadings
   def run
     # fetch the data from the database if it exists
     retrieve_from_database
-binding.pry
-    return @readings unless @readings.size < 5
+    return @readings unless @readings.size != 5
 
     # otherwise, get it from the website
     retrieve_from_website
@@ -23,11 +22,28 @@ binding.pry
   end
 
   def retrieve_from_database
-    @readings = WeatherEntry.select(:name, :min_reading, :max_reading)
+    ids = WeatherEntry.select(:id)
                             .where('entered_on between ? AND ?', @start_date, @end_date)
                             .order(entered_on: :asc)
-                            .group(:entered_on)
-                            .map { |row| {row.name => [row.min_reading, row.max_reading]} }
+                            .pluck(:id)
+    readings = ids.map { |id| WeatherEntry.find(id) }
+    method_name(readings)
+  end
+
+  def method_name(readings)
+    day = @start_date
+    days_readings = []
+    5.times do
+      readings.each do |reading|
+        if reading.entered_on == day
+          days_readings << reading
+        end
+      end
+      day += 1.day
+      @readings << days_readings
+      days_readings = []
+    end
+    @readings.reject!(&:empty?)
   end
 
   def retrieve_from_website
