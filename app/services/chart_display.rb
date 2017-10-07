@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChartDisplay
   def self.process(options)
     obj = new(options)

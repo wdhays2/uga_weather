@@ -1,0 +1,10 @@
+AllCops:
+  Include:
+    - Rakefile
+    - config.ru
+  Exclude:
+    - spec/rails_helper.rb
+Documentation:
+  Enabled: false
+Naming:
+  Enabled: false
