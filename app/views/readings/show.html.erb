@@ -2,7 +2,7 @@
     <input name="date" />
     <input type="submit" value="Submit Date"/>
 </form>
-<% @readings.each_with_index do |reading, indx| %>
+<% @readings.each do |reading| %>
   <h3>Data for: <%= reading[0].entered_on.to_s %></h3>
   <table class="readings" cellspacing="0" width="100%">
     <thead>
@@ -26,7 +26,7 @@
             <td><%= read.avg_reading %></td>
           </tr>
       </tbody>
-      <% end %>
+    <% end %>
   </table>
   <br>
   <form action="/charts" method="get">

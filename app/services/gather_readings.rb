@@ -14,11 +14,12 @@ class GatherReadings
   def run
     # fetch the data from the database if it exists
     retrieve_from_database
-    return @readings unless @readings.size != 5
+    return @readings if @readings.size < 5
 
     # otherwise, get it from the website
     retrieve_from_website
     @readings.reject!(&:empty?)
+    @readings
   end
 
   def retrieve_from_database
@@ -42,12 +43,11 @@ class GatherReadings
   end
 
   def retrieve_from_website
-    5.times do
-      wd = WeatherData.new(@weather_date.strftime('%Y%m%d'))
+    (@start_date..@end_date).each do |date|
+      wd = WeatherData.new(date.strftime('%Y%m%d'))
       readings = wd.process
       read = readings.values.map { |data| Reading.new(data) }
       @readings << read
-      @weather_date += 1.day
     end
   end
 end
