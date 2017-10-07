@@ -3,7 +3,7 @@
     <input type="submit" value="Submit Date"/>
 </form>
 <% @readings.each do |reading| %>
-  <h3>Data for: <%= reading[0].entered_on.to_s %></h3>
+  <h3>Data for: <%= reading[:date] %></h3>
   <table class="readings display" cellspacing="0" width="100%">
     <thead>
       <tr>
@@ -16,14 +16,14 @@
       </tr>
     </thead>
       <tbody>
-        <% reading.each do |read| %>
+        <% reading[:data].each do |read| %>
           <tr>
-            <td><%= read.name %></td>
-            <td><%= read.min_reading %></td>
-            <td><%= read.min_time.strftime("%l:%M %P") %></td>
-            <td><%= read.max_reading %></td>
-            <td><%= read.max_time.strftime("%l:%M %P") %></td>
-            <td><%= read.avg_reading %></td>
+            <td><%= read[:name] %></td>
+            <td><%= read[:min_reading] %></td>
+            <td><%= read[:min_time].strftime("%l:%M %P") %></td>
+            <td><%= read[:max_reading] %></td>
+            <td><%= read[:max_time].strftime("%l:%M %P") %></td>
+            <td><%= read[:avg_reading] %></td>
           </tr>
       <% end %>
     </tbody>
@@ -31,7 +31,7 @@
   <br>
   <form action="/charts" method="get">
     <input type="submit" value="Chart Data">
-    <input type="text" value="<%= reading[0].entered_on.to_s %>" name="date">
+    <input type="text" value="<%= reading[:date] %>" name="date">
   </form>
   <br><br>
 <% end %>

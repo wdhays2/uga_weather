@@ -44,7 +44,7 @@ class GatherReadings
 
   def retrieve_from_website_and_store_in_database
     (@start_date..@end_date).each do |date|
-      next if WeatherEntry.where(entered_on: date.to_s).exist?
+      next if WeatherEntry.where(entered_on: date.to_s).exists?
       wd = WeatherData.new(date.strftime('%Y%m%d'))
       readings = wd.process
       readings.values.each { |data| WeatherEntry.create!(data) }
