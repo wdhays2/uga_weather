@@ -3,5 +3,7 @@
 class ReadingsController < ApplicationController
   def show
     @readings = GatherReadings.process(date: params[:date])
+binding.pry
+as=12
   end
 end

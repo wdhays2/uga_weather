@@ -4,7 +4,7 @@
 </form>
 <% @readings.each do |reading| %>
   <h3>Data for: <%= reading[0].entered_on.to_s %></h3>
-  <table class="readings" cellspacing="0" width="100%">
+  <table class="readings display" cellspacing="0" width="100%">
     <thead>
       <tr>
         <th>Measurement</th>
@@ -15,8 +15,8 @@
         <th>Average</th>
       </tr>
     </thead>
-    <% reading.each do |read| %>
       <tbody>
+        <% reading.each do |read| %>
           <tr>
             <td><%= read.name %></td>
             <td><%= read.min_reading %></td>
@@ -25,8 +25,8 @@
             <td><%= read.max_time.strftime("%l:%M %P") %></td>
             <td><%= read.avg_reading %></td>
           </tr>
-      </tbody>
-    <% end %>
+      <% end %>
+    </tbody>
   </table>
   <br>
   <form action="/charts" method="get">
