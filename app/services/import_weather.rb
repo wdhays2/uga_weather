@@ -4,11 +4,11 @@ class ImportWeather
   def initialize(date)
     # enter a date as a string: '2014-01-01'
     # The whole year for 2014 will be stored into the database when imported.
-    @date = date.to_date.beginning_of_year
+    @date = date.to_date
   end
 
-  def mass_import
-    366.times do
+  def weather_import
+    5.times do
       wd = WeatherData.new(@date.strftime('%Y%m%d'))
       readings = wd.process
       readings.map do |_key, data|
