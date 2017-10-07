@@ -32,14 +32,13 @@ class GatherReadings
 
   def method_name(r)
     day = @start_date
-    days_readings = []
     5.times do
+      days_readings = []
       r.each { |reading| days_readings << reading if reading.entered_on == day }
+      return if days_readings.empty?
       @readings << days_readings
       day += 1.day
-      days_readings = []
     end
-    @readings.reject!(&:empty?)
   end
 
   def retrieve_from_website
