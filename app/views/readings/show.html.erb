@@ -31,7 +31,7 @@
   <br>
   <form action="/charts" method="get">
     <input type="submit" value="Chart Data">
-    <input type="text" value="<%= reading[:date] %>" name="date">
+    <input type="text" value="<%= params[:date] %>" name="date">
   </form>
   <br><br>
 <% end %>

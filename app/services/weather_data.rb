@@ -11,7 +11,7 @@ class WeatherData
   def initialize(date)
     @date = date
     @date ||= (Date.today - 1.day).strftime('%Y%m%d')
-    @url = "http://weather.ggy.uga.edu/data/archive/daily/#{@date}.txt"
+    @url = url_formatter(date)
   end
 
   def process
@@ -20,7 +20,19 @@ class WeatherData
     sort_results
   end
 
+  def url_formatter(date)
+    year = date.first(4)
+    recent = year.to_i >= 2009
+    case recent
+    when true
+      "http://weather.ggy.uga.edu/data/archive/daily/#{@date}.txt"
+    else
+      "http://weather.ggy.uga.edu/data/archive/daily/#{year}/#{@date}.txt"
+    end
+  end
+
   def retreive_data_from_url
+    # add error handler for when date is out of range
     data = open(@url).readlines
     extract_data(data)
   end

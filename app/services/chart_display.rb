@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class ChartDisplay
+  include ReadingsHelper
+
   def self.process(options)
     obj = new(options)
     obj.run
   end
 
   def initialize(options)
-    weather_date = Date.parse(options[:date] || '2017-01-01')
-    @start_date = weather_date - 2.days
-    @end_date = weather_date + 2.days
+    readings_date(options)
   end
 
   # [
@@ -58,6 +58,7 @@ class ChartDisplay
   end
 
   def min_max_query_for_range(category)
+    retrieve_from_website_and_store_in_database unless db_has_5_days_of_data?
     WeatherEntry.select(:min_reading, :max_reading)
                 .where(name: category)
                 .where('entered_on between ? AND ?', @start_date, @end_date)
