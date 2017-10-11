@@ -1,13 +1,16 @@
 <div class="container-fluid">
   <br>
   <div class="row">
-    <div class="col-md-3">
-      <div class="input-group">
-        <span class="input-group-btn">
-          <button class="btn btn-success" type="button">Submit Date</button>
-        </span>
-        <input type="text" class="form-control" placeholder="20170101">
-      </div>
+    <div class="col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6
+      col-xs-offset-2 col-xs-8">
+      <form action="/readings" method="get">
+        <div class="input-group">
+          <span class="input-group-btn">
+            <button class="btn btn-success" type="submit">Submit Date</button>
+          </span>
+          <input type="text" class="form-control" name="date" placeholder=<%= "#{ (Date.today - 3.days).strftime('%Y%m%d') }" %>>
+        </div>
+      </form>
     </div>
   </div>
   <% @readings.each do |reading| %>
@@ -37,10 +40,19 @@
       </tbody>
     </table>
     <br>
-    <form action="/charts" method="get">
-      <input type="text" value="<%= params[:date] %>" name="date">
-      <button type="submit" class="btn btn-primary">Graph Data</button>
-    </form>
+    <div class="row">
+      <div class="col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6
+        col-xs-offset-2 col-xs-8">
+        <form action="/charts" method="get">
+          <div class="input-group">
+            <input type="text" class="form-control" value="<%= params[:date] %>" name="date" placeholder=<%= "#{ (Date.today - 3.days).strftime('%Y%m%d') }" %>>
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-primary">Graph Data</button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
     <br><br>
   <% end %>
 </div>
