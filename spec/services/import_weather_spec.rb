@@ -9,8 +9,10 @@ RSpec.describe ImportWeather do
 
   context 'instance methods' do
     it 'loads weather data if given a valid date' do
-      iw = ImportWeather.new(@date)
-      expect { iw.weather_import }.to_not raise_error
+      VCR.use_cassette 'services/import_weather' do
+        iw = ImportWeather.new(@date)
+        expect { iw.weather_import }.to_not raise_error
+      end
     end
   end
 end

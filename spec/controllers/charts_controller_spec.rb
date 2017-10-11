@@ -11,8 +11,10 @@ RSpec.describe ChartsController, type: :controller do
     end
 
     it 'returns charts for 5 days weather' do
-      get :show, params: @data_params
-      expect(response.status).to eq(200)
+      VCR.use_cassette 'controller/charts' do
+        get :show, params: @data_params
+        expect(response.status).to eq(200)
+      end
     end
   end
 end

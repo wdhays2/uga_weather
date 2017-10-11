@@ -1,0 +1,50 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://weather.ggy.uga.edu/data/archive/daily/20170101.txt
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 11 Oct 2017 06:52:30 GMT
+      Server:
+      - Apache
+      Last-Modified:
+      - Mon, 02 Jan 2017 04:58:28 GMT
+      Etag:
+      - '"34f-545156702db7d"'
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - '847'
+      Content-Type:
+      - text/plain
+    body:
+      encoding: UTF-8
+      string: "Parameter                   Max   Max Time        Min   Min Time    Average\r\nWind
+        Direction              165    12:00am         53    12:16pm         68\r\nWind
+        Speed                    8     8:46pm          0    12:00am          0\r\nHumidity
+        \                    96     1:46pm         87    12:00am         95\r\nOut
+        Temp                   49.7    11:49pm       42.0     1:05am       45.3\r\nRaw
+        Barometer               998    10:21pm        995     1:50am        997\r\nUV
+        Index                    0.7    12:54pm        0.0    12:00am        0.0\r\nSolar
+        Radiation             102     1:00pm          0    12:00am         15\r\nWind
+        Chill                 49.7    11:49pm       40.0     6:17am       45.3\r\nOut
+        Heat Ix                56.3    11:49pm       47.7    12:08am       51.6\r\nDew
+        Point                  48.6    11:49pm       39.0    12:01am       43.8\r\n"
+    http_version: 
+  recorded_at: Wed, 11 Oct 2017 06:52:44 GMT
+recorded_with: VCR 3.0.3

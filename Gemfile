@@ -44,7 +44,10 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', require: false
   gem 'simplecov'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do
