@@ -9,7 +9,7 @@ RSpec.describe WeatherData do
       expect { wd.process }.to_not raise_error
     end
 
-    it 'loads weather data if given an older valid date' do
+    it 'loads weather data if given an older valid date- modified url' do
       wd2 = WeatherData.new('20070208')
       expect { wd2.process }.to_not raise_error
     end

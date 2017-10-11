@@ -5,18 +5,17 @@ module ReadingsHelper
     begin
       @w_date = Date.parse(options[:date])
     rescue ArgumentError
-      reset_dates(options)
+      reset_date
     end
     if @w_date >= Date.yesterday || @w_date < Date.parse('2002-09-09')
-      reset_dates(options)
+      reset_date
     end
     @start_date = @w_date - 2.days
     @end_date = @w_date + 2.days
   end
 
-  def reset_dates(options)
+  def reset_date
     @w_date = Date.today - 3.days
-    options[:date] = @w_date.to_s
   end
 
   def db_has_5_days_of_data?
