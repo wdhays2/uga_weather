@@ -1,20 +1,28 @@
-<form action="/readings" method="get">
-    <input name="date" />
-    <input type="submit" value="Submit Date"/>
-</form>
-<% @readings.each do |reading| %>
-  <h3>Data for: <%= reading[:date] %></h3>
-  <table class="readings display" cellspacing="0" width="100%">
-    <thead>
-      <tr>
-        <th>Measurement</th>
-        <th>Min Reading</th>
-        <th>Min Time</th>
-        <th>Max Reading</th>
-        <th>Max Time</th>
-        <th>Average</th>
-      </tr>
-    </thead>
+<div class="container-fluid">
+  <br>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="input-group">
+        <span class="input-group-btn">
+          <button class="btn btn-success" type="button">Submit Date</button>
+        </span>
+        <input type="text" class="form-control" placeholder="20170101">
+      </div>
+    </div>
+  </div>
+  <% @readings.each do |reading| %>
+    <h3>Data for: <%= reading[:date] %></h3>
+    <table class="readings display" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>Measurement</th>
+          <th>Min Reading</th>
+          <th>Min Time</th>
+          <th>Max Reading</th>
+          <th>Max Time</th>
+          <th>Average</th>
+        </tr>
+      </thead>
       <tbody>
         <% reading[:data].each do |read| %>
           <tr>
@@ -25,13 +33,14 @@
             <td><%= read[:max_time].strftime("%l:%M %P") %></td>
             <td><%= read[:avg_reading] %></td>
           </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <br>
-  <form action="/charts" method="get">
-    <input type="submit" value="Chart Data">
-    <input type="text" value="<%= params[:date] %>" name="date">
-  </form>
-  <br><br>
-<% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+    <form action="/charts" method="get">
+      <input type="text" value="<%= params[:date] %>" name="date">
+      <button type="submit" class="btn btn-primary">Graph Data</button>
+    </form>
+    <br><br>
+  <% end %>
+</div>
