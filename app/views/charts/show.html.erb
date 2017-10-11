@@ -23,17 +23,17 @@
   </div>
 <% end %>
 <div class="row">
-      <div class="col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6
-        col-xs-offset-2 col-xs-8">
-        <form action="/charts" method="get">
-          <div class="input-group">
-            <input type="text" class="form-control" name="date"
-              placeholder=<%= "#{ (Date.today - 3.days).strftime('%Y%m%d') }" %>>
-            <span class="input-group-btn">
-              <button type="submit" class="btn btn-primary">Graph New Date</button>
-            </span>
-          </div>
-        </form>
+  <div class="col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6
+    col-xs-offset-2 col-xs-8">
+    <form action="/charts" method="get">
+      <div class="input-group">
+        <input type="text" class="form-control" name="date"
+          placeholder=<%= "#{ (Date.today - 3.days).strftime('%Y%m%d') }" %>>
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-primary">Graph New Date</button>
+        </span>
       </div>
-    </div>
+    </form>
+  </div>
+</div>
 <br>
