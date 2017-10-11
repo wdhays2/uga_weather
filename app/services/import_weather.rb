@@ -2,8 +2,8 @@
 
 class ImportWeather
   def initialize(date)
-    # enter a date as a string: '2014-01-01'
-    # The whole year for 2014 will be stored into the database when imported.
+    # enter a date as a string: '20140115'
+    # Five days for 2014 will be stored into the database when imported.
     @date = date.to_date
   end
 
