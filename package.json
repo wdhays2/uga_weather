@@ -1,10 +1,16 @@
 {
   "name": "uga_weather",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "@rails/webpacker": "^3.0.2",
+    "coffeescript": "1.12.7"
+  },
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:wdhays2/uga_weather.git",
   "author": "wdhays2 <wdhays2@charter.net>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "webpack-dev-server": "^2.9.1"
+  }
 }
