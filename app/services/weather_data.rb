@@ -3,8 +3,6 @@
 require 'readline'
 require 'date'
 require 'open-uri'
-require 'pry-byebug'
-require 'pry'
 require 'json'
 
 class WeatherData
