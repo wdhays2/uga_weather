@@ -6,18 +6,22 @@ default: &default
   timeout: 5000
   username: wileyhays
   password:
+  encoding: UTF8
+  port: 5432
+  host: localhost
+  min_messages: warning
 
 development:
   <<: *default
-  database: wileyhays/development_postgresql
+  database: development_postgresql
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: wileyhays/test_postgresql
+  database: test_postgresql
 
 production:
   <<: *default
-  database: wileyhays/production_postgresql
+  database: production_postgresql
