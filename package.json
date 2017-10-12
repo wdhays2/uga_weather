@@ -1,5 +1,10 @@
 {
   "name": "uga_weather",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:wdhays2/uga_weather.git",
+  "author": "wdhays2 <wdhays2@charter.net>",
+  "license": "MIT"
 }
