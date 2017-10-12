@@ -4,7 +4,7 @@ module ReadingsHelper
   def readings_date(options)
     begin
       @w_date = Date.parse(options[:date])
-    rescue ArgumentError
+    rescue StandardError
       reset_date
     end
     if @w_date >= Date.yesterday || @w_date < Date.parse('2002-09-09')
