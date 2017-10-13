@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <br>
+  <div class="row">
+    <h1 align="center">University of Georgia</h1>
+    <h4 align="center">Weather by date +/- 2 days</h4>
+  </div>
+  <div class="col-lg-offset-9 col-lg-3 col-md-offset-8 col-md-4 col-sm-offset-7 col-sm-5
+        col-xs-12">
+    <form action="/results" method="get">
+      <div class="input-group">
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="submit">Update</button>
+        </span>
+        <input type="text" class="form-control" name="date" value=<%= "#{
+         @results[0][:date].delete('-') }" %>>
+      </div>
+    </form>
+  </div>
+  <% chart_data = @chart_display.last %>
+    <div class="">
+      <div id="<%= chart_data[:section] %>" style="min-width: 550px; height: 250px; margin: auto">
+      </div>
+      <%= javascript_tag "weatherDisplay(#{ chart_data.to_json })" %>
+    </div>
+    <br><br>
+  <% @results.each do |result| %>
+    <table class="table table-striped table-bordered readings display" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>Measurement</th>
+          <th>Min Reading</th>
+          <th>Min Time</th>
+          <th>Max Reading</th>
+          <th>Max Time</th>
+          <th>Average</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% result[:data].each do |read| %>
+          <tr>
+            <div class="click_row">
+              <td><%= read[:name] %></td>
+              <td><%= read[:min_reading] %></td>
+              <td><%= read[:min_time].strftime("%l:%M %P") %></td>
+              <td><%= read[:max_reading] %></td>
+              <td><%= read[:max_time].strftime("%l:%M %P") %></td>
+              <td><%= read[:avg_reading] %></td>
+            </div>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br><br>
+  <% end %>
+</div>
