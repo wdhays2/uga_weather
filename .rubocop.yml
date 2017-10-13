@@ -4,6 +4,7 @@ AllCops:
     - config.ru
   Exclude:
     - spec/rails_helper.rb
+    - node_modules/**/*
 Documentation:
   Enabled: false
 Naming:

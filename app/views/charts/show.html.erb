@@ -1,11 +1,37 @@
-<br>
-<div class="row">
-      <div class="col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6
-        col-xs-offset-2 col-xs-8">
+<div class="container-fluid">
+  <br>
+  <div class="row">
+    <h1 align="center">University of Georgia</h1>
+    <h4 align="center">Weather Data</h4>
+  </div>
+  <br>
+  <% @chart_display.each_with_index do |chart_data, indx| %>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div id="<%= chart_data[:section] %>" style="min-width: 500px; height: 400px; margin: 20">
+      </div>
+      <%= javascript_tag "weatherDisplay(#{ chart_data.to_json })" %>
+    </div>
+    <% next if indx.even? %>
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+        <br><br>
+        <form action="/readings" method="get">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button class="btn btn-success" type="submit">Back to Readings</button>
+            </span>
+            <input type="text" class="form-control" name="date" value=<%= "#{
+              chart_data[:date_range][2] }" %>>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-offset-6 col-lg-3 col-md-offset-4 col-md-4 col-sm-offset-2 col-sm-5
+        col-xs-12">
+        <br>
         <form action="/charts" method="get">
           <div class="input-group">
             <input type="text" class="form-control" name="date"
-              placeholder=<%= "#{ (Date.today - 3.days).strftime('%Y%m%d') }" %>>
+              value=<%= "#{ chart_data[:date_range][2] }" %>>
             <span class="input-group-btn">
               <button type="submit" class="btn btn-primary">Graph New Date</button>
             </span>
@@ -13,27 +39,7 @@
         </form>
       </div>
     </div>
-<br>
-<% @chart_display.each do |chart_data| %>
-  <div class="col-md-6">
-  <div id="<%= chart_data[:section] %>" style="min-width: 500px; height: 400px; margin: 20">
-  </div>
-  <%= javascript_tag "weatherDisplay(#{ chart_data.to_json })" %>
-  <br><br>
-  </div>
-<% end %>
-<div class="row">
-  <div class="col-lg-offset-4 col-lg-4 col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6
-    col-xs-offset-2 col-xs-8">
-    <form action="/charts" method="get">
-      <div class="input-group">
-        <input type="text" class="form-control" name="date"
-          placeholder=<%= "#{ (Date.today - 3.days).strftime('%Y%m%d') }" %>>
-        <span class="input-group-btn">
-          <button type="submit" class="btn btn-primary">Graph New Date</button>
-        </span>
-      </div>
-    </form>
-  </div>
+    <br><br>
+  <% end %>
+  <br>
 </div>
-<br>

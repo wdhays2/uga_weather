@@ -8,9 +8,8 @@ require 'shoulda/matchers'
 require 'vcr'
 require 'webmock/rspec'
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-  SimpleCov::Formatter::HTMLFormatter
-]
+SimpleCov.formatter =
+  SimpleCov::Formatter::MultiFormatter.new(SimpleCov::Formatter::HTMLFormatter)
 
 WebMock.disable_net_connect!(allow_localhost: true)
 
