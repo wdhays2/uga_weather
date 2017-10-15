@@ -9,6 +9,7 @@ class ChartDisplay
   end
 
   def initialize(options)
+    @options = options
     readings_date(options)
   end
 
@@ -26,16 +27,29 @@ class ChartDisplay
   # ]
 
   def run
-    date_range = (@start_date..@end_date).map { |date| date.to_s.delete('-') }
+    @date_range = (@start_date..@end_date).map { |date| date.to_s.delete('-') }
     retrieve_from_website_and_store_in_database unless db_has_5_days_of_data?
+    @options[:category].nil? ? my_categories : one_category(@options[:category])
+  end
+
+  def my_categories
     categories.map do |category|
       {
         section: category,
-        date_range: date_range,
+        date_range: @date_range,
         tooltip: tooltip_value(category),
         values: min_max_query_for_range(category)
       }
     end
+  end
+
+  def one_category(category)
+    {
+      section: category,
+      date_range: @date_range,
+      tooltip: tooltip_value(category),
+      values: min_max_query_for_range(category)
+    }
   end
 
   private

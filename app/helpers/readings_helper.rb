@@ -18,9 +18,8 @@ module ReadingsHelper
     rescue StandardError
       reset_date
     end
-    if @w_date >= Date.yesterday || @w_date < Date.parse('2002-09-09')
-      reset_date
-    end
+    reset_date if @w_date >= Date.yesterday ||
+                  @w_date < Date.parse('2002-09-09')
   end
 
   def reset_date
@@ -40,7 +39,7 @@ module ReadingsHelper
                 .where('entered_on between ? AND ?', @start_date, @end_date)
                 .group(:entered_on)
                 .pluck(:entered_on)
-                .size > 0
+                .size == 1
   end
 
   def retrieve_from_website_and_store_in_database
