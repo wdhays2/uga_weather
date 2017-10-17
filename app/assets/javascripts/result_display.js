@@ -1,9 +1,8 @@
 $(document).ready(function(){
+
   $(".click_row").click(function(){
   });
-});
 
-$(document).ready(function(){
   $("#datepicker").datepicker({
     changeMonth: true,
     changeYear: true,
@@ -11,10 +10,5 @@ $(document).ready(function(){
     maxDate: -1,
     dateFormat: 'yymmdd'
   });
+
 });
-
-// document.getElementById("myDate").addEventListener("select", loadDate);
-
-// function loadDate() {
-//     document.getElementById("datepicker");
-// };
