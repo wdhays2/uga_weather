@@ -15,7 +15,7 @@
           <span class="input-group-btn" >
             <button class="btn btn-primary" type="submit">Update</button>
           </span>
-          <input type="text" class="form-control" id="datepicker" name="date" value=<%= %>>
+          <input type="text" class="form-control" id="datepicker" name="date" value=<%= params[:date] %>>
         </div>
       </form>
     </div>
@@ -31,13 +31,14 @@
     <button class="btn btn-primary dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Category<span class="caret"></span></button>
       <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
         <% @results[0][:data].each do |category| %>
-          <li role="presentation"><%= link_to(category[:name], "/results?category=#{category[:name]}&date=#{(@results[0][:date].to_date - 2.days).to_s.delete('-')}") %></li>
+          <li role="presentation"><%= link_to_js_method(category, @results) %></li>
         <% end %>
       </ul>
     </div>
   </div>
   <br><br>
 <!-- Tabe data -->
+  <%= hidden_field_tag('category', params[:category]) %>
   <% @results.each do |result| %>
     <table class="table table-striped table-bordered readings display" cellspacing="0" width="100%">
       <thead>
@@ -53,7 +54,7 @@
       <tbody>
         <% result[:data].each do |read| %>
           <tr>
-            <td><%= link_to(read[:name], "/results?category=#{read[:name]}&date=#{(@results[0][:date].to_date - 2.days).to_s.delete('-')}") %></td>
+            <td><%= link_to(read[:name], '#', onclick: "setCategoryToUse('#{read[:name]}')") %></td>
             <td><%= read[:min_reading] %></td>
             <td><%= read[:min_time].strftime("%l:%M %P") %></td>
             <td><%= read[:max_reading] %></td>

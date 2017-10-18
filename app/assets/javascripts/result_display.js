@@ -8,7 +8,27 @@ $(document).ready(function(){
     changeYear: true,
     minDate: new Date(2002, 09, 07),
     maxDate: -1,
-    dateFormat: 'yymmdd'
+    dateFormat: 'yymmdd',
+    onSelect: function(dateText, inst) {
+      loadNewPage()
+    }
   });
 
 });
+
+function setCategoryAndDateToUse(category, date) {
+  $("#category").val(category)
+  $("#datepicker").val(date)
+  loadNewPage()
+}
+
+function setCategoryToUse(category) {
+  $("#category").val(category)
+  loadNewPage()
+}
+
+function loadNewPage() {
+  var category = $("#category").val()
+  var date = $("#datepicker").val()
+  window.location = "/results?category=" + category + "&date=" + date
+}
