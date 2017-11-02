@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'results#show'
-  resource :results, only: [:show]
+  root 'weather_results#show'
+  resource :weather_results, only: [:show]
 end

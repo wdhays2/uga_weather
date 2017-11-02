@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ResultsController, type: :controller do
+RSpec.describe WeatherResultsController, type: :controller do
   describe 'GET #show' do
     it 'returns http success' do
       get :show

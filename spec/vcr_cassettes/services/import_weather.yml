@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 11 Oct 2017 06:52:28 GMT
+      - Thu, 02 Nov 2017 20:31:13 GMT
       Server:
       - Apache
       Last-Modified:
@@ -46,7 +46,7 @@ http_interactions:
         Heat Ix                75.3     2:11pm       58.1     6:57am       65.8\r\nDew
         Point                  60.7     1:04pm       50.0     6:57am       56.0\r\n"
     http_version: 
-  recorded_at: Wed, 11 Oct 2017 06:52:43 GMT
+  recorded_at: Thu, 02 Nov 2017 20:31:12 GMT
 - request:
     method: get
     uri: http://weather.ggy.uga.edu/data/archive/daily/20170115.txt
@@ -66,7 +66,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 11 Oct 2017 06:52:29 GMT
+      - Thu, 02 Nov 2017 20:31:14 GMT
       Server:
       - Apache
       Last-Modified:
@@ -93,7 +93,7 @@ http_interactions:
         Heat Ix                74.9     2:07pm       56.2     7:54am       64.7\r\nDew
         Point                  59.6    11:34am       48.5     7:54am       52.4\r\n"
     http_version: 
-  recorded_at: Wed, 11 Oct 2017 06:52:43 GMT
+  recorded_at: Thu, 02 Nov 2017 20:31:13 GMT
 - request:
     method: get
     uri: http://weather.ggy.uga.edu/data/archive/daily/20170116.txt
@@ -113,7 +113,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 11 Oct 2017 06:52:29 GMT
+      - Thu, 02 Nov 2017 20:31:14 GMT
       Server:
       - Apache
       Last-Modified:
@@ -140,7 +140,7 @@ http_interactions:
         Heat Ix                68.1     2:39pm       55.4     6:20am       61.7\r\nDew
         Point                  57.1     2:39pm       46.9     6:07am       52.5\r\n"
     http_version: 
-  recorded_at: Wed, 11 Oct 2017 06:52:44 GMT
+  recorded_at: Thu, 02 Nov 2017 20:31:13 GMT
 - request:
     method: get
     uri: http://weather.ggy.uga.edu/data/archive/daily/20170117.txt
@@ -160,7 +160,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 11 Oct 2017 06:52:29 GMT
+      - Thu, 02 Nov 2017 20:31:14 GMT
       Server:
       - Apache
       Last-Modified:
@@ -187,7 +187,7 @@ http_interactions:
         Heat Ix                76.3     4:27pm       63.1     1:28am       68.6\r\nDew
         Point                  59.1    12:56pm       55.2     1:28am       56.7\r\n"
     http_version: 
-  recorded_at: Wed, 11 Oct 2017 06:52:44 GMT
+  recorded_at: Thu, 02 Nov 2017 20:31:13 GMT
 - request:
     method: get
     uri: http://weather.ggy.uga.edu/data/archive/daily/20170118.txt
@@ -207,7 +207,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 11 Oct 2017 06:52:29 GMT
+      - Thu, 02 Nov 2017 20:31:14 GMT
       Server:
       - Apache
       Last-Modified:
@@ -234,5 +234,5 @@ http_interactions:
         Heat Ix                76.0     2:59pm       63.4    11:56pm       70.0\r\nDew
         Point                  61.0     9:07am       45.6     4:13pm       54.4\r\n"
     http_version: 
-  recorded_at: Wed, 11 Oct 2017 06:52:44 GMT
+  recorded_at: Thu, 02 Nov 2017 20:31:13 GMT
 recorded_with: VCR 3.0.3

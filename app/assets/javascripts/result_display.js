@@ -30,5 +30,5 @@ function setCategoryToUse(category) {
 function loadNewPage() {
   var category = $("#category").val()
   var date = $("#datepicker").val()
-  window.location = "/results?category=" + category + "&date=" + date
+  window.location = "/weather_results?category=" + category + "&date=" + date
 }

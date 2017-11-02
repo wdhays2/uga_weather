@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ResultsController < ApplicationController
+class WeatherResultsController < ApplicationController
   def show
     ctgory = params[:category].blank? ? 'Out Temp' : params[:category]
     @results = GatherResults.process(date: params[:date])

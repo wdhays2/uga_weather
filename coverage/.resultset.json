@@ -84,15 +84,10 @@
         1,
         null
       ],
-      "/Users/wileyhays/github/rails_weather_uga/uga_weather/app/controllers/results_controller.rb": [
+      "/Users/wileyhays/github/rails_weather_uga/uga_weather/app/controllers/weather_entries_controller.rb": [
         null,
         null,
         1,
-        1,
-        1,
-        1,
-        1,
-        null,
         null
       ],
       "/Users/wileyhays/github/rails_weather_uga/uga_weather/app/controllers/application_controller.rb": [
@@ -102,10 +97,15 @@
         1,
         null
       ],
-      "/Users/wileyhays/github/rails_weather_uga/uga_weather/app/controllers/weather_entries_controller.rb": [
+      "/Users/wileyhays/github/rails_weather_uga/uga_weather/app/controllers/weather_results_controller.rb": [
         null,
         null,
         1,
+        1,
+        1,
+        1,
+        1,
+        null,
         null
       ],
       "/Users/wileyhays/github/rails_weather_uga/uga_weather/app/models/reading.rb": [
@@ -385,6 +385,6 @@
         null
       ]
     },
-    "timestamp": 1509646475
+    "timestamp": 1509655054
   }
 }
