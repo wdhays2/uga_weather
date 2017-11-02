@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ChartDisplay
-  include ReadingsHelper
+  include ResultsHelper
 
   def self.process(options)
     obj = new(options)
